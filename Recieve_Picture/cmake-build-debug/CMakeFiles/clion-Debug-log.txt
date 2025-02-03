@@ -1,0 +1,9 @@
+"D:\CLion 2023.3.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/CLion 2023.3.1/bin/ninja/win/x64/ninja.exe" -G Ninja -S E:\untitled -B E:\untitled\cmake-build-debug
+-- OpenCV ARCH: x64
+-- OpenCV RUNTIME: mingw
+-- OpenCV STATIC: OFF
+-- Found OpenCV 4.5.5 in E:/opencv/OpenCV-MinGW-Build-OpenCV-4.5.5-x64/OpenCV-MinGW-Build-OpenCV-4.5.5-x64/x64/mingw/lib
+-- You might need to add E:\opencv\OpenCV-MinGW-Build-OpenCV-4.5.5-x64\OpenCV-MinGW-Build-OpenCV-4.5.5-x64\x64\mingw\bin to your PATH to be able to run your applications.
+-- Configuring done (1.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: E:/untitled/cmake-build-debug
