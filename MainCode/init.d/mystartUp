@@ -1,0 +1,40 @@
+EMON1="/usr/bin/python3 /Init.py"
+DAEMON2="/usr/bin/python3 /ONESEND.py"
+LOGFILE="/var/log/mystartup.log"
+PIDFILE="/var/run/onesend.pid"
+
+case "$1" in
+    start)
+        echo "==== Startup Process Begin ====" >> $LOGFILE
+        echo "Killing existing rkipc processes..." >> $LOGFILE
+        /usr/bin/killall rkipc >> $LOGFILE 2>&1
+        sleep 1
+
+        echo "Starting udhcpc for wlan0..." >> $LOGFILE
+        /sbin/udhcpc -i wlan0 -t 30 -q >> $LOGFILE 2>&1 &
+
+        echo "Running Init.py (one-time execution)..." >> $LOGFILE
+        $DAEMON1 >> $LOGFILE 2>&1
+
+        echo "Starting ONESEND.py (continuous)..." >> $LOGFILE
+        nohup $DAEMON2 >> $LOGFILE 2>&1 &
+        echo $! > $PIDFILE
+
+ echo "==== Startup Process Complete ====" >> $LOGFILE
+        ;;
+    stop)
+        echo "Stopping ONESEND.py..." >> $LOGFILE
+        [ -f $PIDFILE ] && kill $(cat $PIDFILE) && rm -f $PIDFILE
+        echo "Stopped!" >> $LOGFILE
+        ;;
+    restart)
+        $0 stop
+        sleep 1
+        $0 start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+exit 0
+~
